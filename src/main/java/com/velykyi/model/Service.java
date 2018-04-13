@@ -1,8 +1,7 @@
 package com.velykyi.model;
 
-import com.velykyi.Constants;
+import com.velykyi.constants.Constants;
 
-import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 

@@ -1,11 +1,10 @@
 package com.velykyi.controller;
 
-import com.velykyi.Constants;
+import com.velykyi.constants.Constants;
 import com.velykyi.Language;
 import com.velykyi.model.Service;
 import com.velykyi.view.View;
 
-import java.math.BigDecimal;
 import java.util.Deque;
 import java.util.Scanner;
 import java.util.regex.Pattern;

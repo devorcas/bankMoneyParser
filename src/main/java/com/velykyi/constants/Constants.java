@@ -1,4 +1,4 @@
-package com.velykyi;
+package com.velykyi.constants;
 
 import java.math.BigDecimal;
 

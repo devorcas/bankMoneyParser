@@ -4,7 +4,7 @@ import com.velykyi.Language;
 
 import java.util.*;
 
-import static com.velykyi.Constants.*;
+import static com.velykyi.constants.Constants.*;
 
 public class View {
     private static final String PATTERN_MAIN_CURRENCY ="^(0|[1-9][0-9]*)\\" ;
