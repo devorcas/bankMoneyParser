@@ -5,16 +5,17 @@ import com.velykyi.LANGUAGES;
 import com.velykyi.model.Model;
 import com.velykyi.view.View;
 
-import java.util.*;
-
-import static com.velykyi.LANGUAGES.valueOf;
+import java.util.Deque;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Controller {
     Model model;
     View view;
     Map<GlobalConstants, Locale> localeHashMap;
     LANGUAGES[] languages = LANGUAGES.values();
-
 
 
     public Controller() {
@@ -27,27 +28,42 @@ public class Controller {
 
         this.setLanguage(sc);
 
-        Deque<String > deque = model.parseMoney("217879,23");
-        for (String s:
-             deque) {
-            view.printNumber(s);
+        String s = inputMoneyValue(sc).trim();
+
+
+        Deque<String> deque = model.parseMoney(s);
+        for (String s1 :
+                deque) {
+            view.printNumber(s1);
         }
 
     }
 
-    public void setLanguage(Scanner sc) {
-        while (true){
+    private String inputMoneyValue(Scanner sc) {
+        String money;
+        String pattern = view.getPattern();
+        while (true) {
+            view.printMoneyMessage();
+            money = sc.next();
+            if (Pattern.matches(pattern, money)) break;
+            view.printWrongMessage();
+        }
+        return money;
+    }
+
+    private void setLanguage(Scanner sc) {
+        LANGUAGES language;
+        while (true) {
             view.printLanguageMenu();
             String lang = sc.next().toUpperCase();
             try {
-                LANGUAGES languages = LANGUAGES.valueOf(lang);
-
-            } catch (Exception e){
+                language = LANGUAGES.valueOf(lang);
+                break;
+            } catch (Exception e) {
                 view.printWrongMenu();
             }
         }
-
-
+        view.setLanguage(language);
     }
 
 
