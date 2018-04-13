@@ -3,7 +3,6 @@ package com.velykyi;
 import java.util.Locale;
 
 public enum Language {
-    // todo
     EN("English", new Locale("en")),
     UK("Українська", new Locale("uk"));
 

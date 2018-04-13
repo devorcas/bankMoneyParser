@@ -2,22 +2,21 @@ package com.velykyi;
 
 import java.math.BigDecimal;
 
-public interface Constants {
-    // TODO
-    BigDecimal MAX_BARRIER = BigDecimal.valueOf(2147483647);
-    String MESSAGES_BUNDLE_NAME = "messages";
-    String WRONG_MENU_DATA = "input.wrong.menu.data";
-    String WRONG_INPUT_INT_DATA = "input.wrong.data";
-    String CHOOSE_LANGUAGE = "choose.language";
-    String MENU_CONTINUE = "menu.continue";
-    String MENU_EXIT = "menu.exit";
-    String CURRENCY = "currency";
-    String COINS = "coins";
-    String FOR = "for";
-    String CURRENCY_SING = "currency.sign";
-    String INPUT_AMOUNT_OF_MONEY_USING_SIGN = "input.amount.money.using.sing";
-    String BILLIONS = "billions";
-    String MILLIONS = "millions";
-    String THOUSAND = "thousand";
-    String AND = "and";
+public final  class Constants {
+    public final static BigDecimal MAX_BARRIER = BigDecimal.valueOf(2147483647);
+    public final static String MESSAGES_BUNDLE_NAME = "messages";
+    public final static String WRONG_MENU_DATA = "input.wrong.menu.data";
+    public final static String WRONG_INPUT_INT_DATA = "input.wrong.data";
+    public final static String CHOOSE_LANGUAGE = "choose.language";
+    public final static String MENU_CONTINUE = "menu.continue";
+    public final static String MENU_EXIT = "menu.exit";
+    public final static String CURRENCY = "currency";
+    public final static String COINS = "coins";
+    public final static String FOR = "for";
+    public final static String CURRENCY_SING = "currency.sign";
+    public final static String INPUT_AMOUNT_OF_MONEY_USING_SIGN = "input.amount.money.using.sing";
+    public final static String BILLIONS = "billions";
+    public final static String MILLIONS = "millions";
+    public final static String THOUSAND = "thousand";
+    public final static String AND = "and";
 }
