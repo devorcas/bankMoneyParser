@@ -1,43 +1,63 @@
 package com.velykyi.controller;
 
-import com.velykyi.GlobalConstants;
-import com.velykyi.LANGUAGES;
-import com.velykyi.model.Model;
+import com.velykyi.Constants;
+import com.velykyi.Language;
+import com.velykyi.model.Service;
 import com.velykyi.view.View;
 
 import java.util.Deque;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Controller {
-    Model model;
+    Service service;
     View view;
-    Map<GlobalConstants, Locale> localeHashMap;
-    LANGUAGES[] languages = LANGUAGES.values();
 
 
     public Controller() {
-        this.model = new Model();
+        this.service = new Service();
         this.view = new View();
     }
 
     public void processUser() {
+        boolean flag = true;
         Scanner sc = new Scanner(System.in);
 
-        this.setLanguage(sc);
+        service.setMaxBarrier(Constants.MAX_BARRIER);
 
-        String s = inputMoneyValue(sc).trim();
+        while (flag) {
+
+            setLanguage(sc);
+
+            String[] splittedSum = inputMoneyValue(sc).trim().split(",|\\.");
+
+            Integer integerPart = Integer.valueOf(splittedSum[0]);
+            Integer fractionalPart = Integer.valueOf(splittedSum[1]);
 
 
-        Deque<String> deque = model.parseMoney(s);
-        for (String s1 :
-                deque) {
-            view.printNumber(s1);
+            Deque<String> deque = service.parseMoney(integerPart, fractionalPart);
+            deque.stream().forEach(view::printNumber);
+            flag = changeLanguageOrExit(sc);
         }
 
     }
+
+    private boolean changeLanguageOrExit(Scanner sc) {
+        String s;
+        while (true) {
+            view.printMainMenu();
+            s = sc.next();
+            switch (s){
+                case View.MENU_EXIT_SING: return false;
+                case View.MENU_CONTINUE_SIGN: return true;
+                default: {
+                    view.printWrongMenu();
+                    continue;
+                }
+            }
+        }
+    }
+
 
     private String inputMoneyValue(Scanner sc) {
         String money;
@@ -52,12 +72,12 @@ public class Controller {
     }
 
     private void setLanguage(Scanner sc) {
-        LANGUAGES language;
+        Language language;
         while (true) {
             view.printLanguageMenu();
             String lang = sc.next().toUpperCase();
             try {
-                language = LANGUAGES.valueOf(lang);
+                language = Language.valueOf(lang);
                 break;
             } catch (Exception e) {
                 view.printWrongMenu();
