@@ -86,4 +86,8 @@ public class View {
                 MENU_SING,
                 bundle.getString(MENU_EXIT)));
     }
+
+    public void printWrongBarrier(long maxBarrier) {
+        printMessage(bundle.getString(OUT_OF_MAX_VALUE) + maxBarrier);
+    }
 }

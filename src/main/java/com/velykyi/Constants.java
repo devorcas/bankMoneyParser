@@ -3,7 +3,7 @@ package com.velykyi;
 import java.math.BigDecimal;
 
 public final  class Constants {
-    public final static BigDecimal MAX_BARRIER = BigDecimal.valueOf(2147483647);
+    public final static long MAX_BARRIER = Long.valueOf(Integer.MAX_VALUE);
     public final static String MESSAGES_BUNDLE_NAME = "messages";
     public final static String WRONG_MENU_DATA = "input.wrong.menu.data";
     public final static String WRONG_INPUT_INT_DATA = "input.wrong.data";
@@ -19,4 +19,5 @@ public final  class Constants {
     public final static String MILLIONS = "millions";
     public final static String THOUSAND = "thousand";
     public final static String AND = "and";
+    public final static String OUT_OF_MAX_VALUE = "out.max.value";
 }

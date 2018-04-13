@@ -5,6 +5,7 @@ import com.velykyi.Language;
 import com.velykyi.model.Service;
 import com.velykyi.view.View;
 
+import java.math.BigDecimal;
 import java.util.Deque;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -23,13 +24,16 @@ public class Controller {
         boolean flag = true;
         Scanner sc = new Scanner(System.in);
 
-        service.setMaxBarrier(Constants.MAX_BARRIER);
-
         while (flag) {
 
             setLanguage(sc);
 
             String[] splittedSum = inputMoneyValue(sc).trim().split(",|\\.");
+
+            if (Long.valueOf(splittedSum[0]) > Constants.MAX_BARRIER ){
+                view.printWrongBarrier(Constants.MAX_BARRIER);
+                continue;
+            }
 
             Integer integerPart = Integer.valueOf(splittedSum[0]);
             Integer fractionalPart = Integer.valueOf(splittedSum[1]);

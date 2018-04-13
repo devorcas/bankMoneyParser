@@ -7,12 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Service {
-    private BigDecimal maxBarrier;
 
-
-    public void setMaxBarrier(BigDecimal maxBarrier) {
-        this.maxBarrier = maxBarrier;
-    }
 
     public Deque<String> parseMoney(Integer integerPart, Integer fractionalPart) {
 
