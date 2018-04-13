@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public interface Constants {
     // TODO
     BigDecimal MAX_BARRIER = BigDecimal.valueOf(2147483647);
-    String MESSAGES_BUNDLE_NAME = "numbers";
+    String MESSAGES_BUNDLE_NAME = "messages";
     String WRONG_MENU_DATA = "input.wrong.menu.data";
     String WRONG_INPUT_INT_DATA = "input.wrong.data";
     String CHOOSE_LANGUAGE = "choose.language";
