@@ -1,49 +1,65 @@
 package com.velykyi.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Model {
-    public  Deque<String> deque = new ArrayDeque<>();
 
+    public Deque<String> parseMoney(String numbers){
+        Deque<String> deque1 = new ArrayDeque<>();
+        Deque<String> deque2 = new ArrayDeque<>();
+//        String numbers = money.toPlainString();
+        String[] s = numbers.split(",");
+        deque1 = splitNumberAndFillDeque(Integer.valueOf(s[0]));
+        deque2 = splitThreeDigitNumber(Integer.valueOf(s[1]), "_cent");
+        deque1.add("and");
+        deque1.addAll(deque2);
 
-    public  Deque<String> getDeque() {
+        return deque1;
+
+    }
+
+    public Deque<String> splitNumberAndFillDeque(int number) {
+        Deque<String> deque = new ArrayDeque<>();
+        String ending = null;
+        for (int spliter = 1_000_000_000; spliter > 0; spliter /= 1000) {
+            int threeDigitsNumber = number / spliter;
+            if (threeDigitsNumber == 0) continue;
+            if (spliter == 1_000_000_000) ending = "_bilions";
+            if (spliter == 1_000_000) ending = "_milions";
+            if (spliter == 1_000) ending = "_thousand";
+            if (spliter == 1) ending = "_dollars";
+            deque.addAll(splitThreeDigitNumber(threeDigitsNumber, ending));
+            number = number % spliter;
+        }
         return deque;
     }
 
-    public void parseNumber(int mainNumber) {
-        for (int i = 1_000_000_000 ; i > 0 ; i /= 1000) {
-            int remainder = mainNumber / i;
-            if (remainder == 0) continue;
-            parserHundreds(remainder);
-            String last = deque.pollLast();
-            if (last == "many") {
-                deque.add("many" + i);
-            } else deque.add(Integer.valueOf(last) * i + "");
-            mainNumber = mainNumber % i;
+
+    public Deque<String> splitThreeDigitNumber(int digitsNumber, String ending) {
+        Deque<String> deque = new ArrayDeque<>();
+        while (digitsNumber > 0) {
+            if (digitsNumber < 10 ) {
+                deque.add(Integer.toString(digitsNumber) + ending);
+                return deque;
+            }
+            int length = String.valueOf(digitsNumber).length();
+            int local_splitter = (int) Math.pow(10, length - 1);
+            int mod = digitsNumber % local_splitter;
+            if (digitsNumber <= 19 | mod == 0) {
+                deque.add(Integer.toString(digitsNumber));
+                deque.add(ending);
+                return deque;
+            }
+            int number = digitsNumber - mod;
+            deque.add(Integer.toString(number));
+            digitsNumber %= local_splitter;
         }
+        return deque;
     }
 
-    private void parserHundreds(int mainNumber) {
-        if (mainNumber >= 100 && mainNumber <= 999) {
-            int remainder = mainNumber % 100;
-            int hundreds = mainNumber - remainder;
-            deque.add(Integer.toString(hundreds));
-            parserHundreds(remainder);
-            return;
-        } else if (mainNumber >= 20 && mainNumber <= 99) {
-            int remainder = mainNumber % 10;
-            int tens = mainNumber - remainder;
-            deque.add(Integer.toString(tens));
-            parserHundreds(remainder);
-            return;
-        } else if (mainNumber >= 10 && mainNumber < 20) {
-            deque.add(Integer.toString(mainNumber));
-            deque.add("many");
-            return;
-        } else if (mainNumber >= 1 && mainNumber < 10){
-            deque.add(Integer.toString(mainNumber));
-            return;
-        } else return;
-    }
+
+//
+
 }
